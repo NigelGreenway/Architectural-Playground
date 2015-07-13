@@ -1,0 +1,50 @@
+{% extends '@Base/base.html.twig' %}
+
+{% block title %}{{ customer.firstName ~ ' ' ~ customer.lastNames }}'s profile{% endblock %}
+
+{% block body %}
+
+<p id="error"></p>
+
+<p><a href="{{ route('customer_listing') }}">All Customers</a></p>
+
+    <p>Hello {{ customer.firstName }} [{{ customer.username }}]</p>
+
+    <form id="demo-changeEmail">
+        <input name="emailAddress" type="email" value="{{ customer.emailAddress }}"/>
+        <button type="submit">Update Email</button>
+    </form>
+
+    <p id="test"></p>
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        document.getElementById('demo-changeEmail').addEventListener('submit', function(event) {
+            Ajax.put(
+                Router.generate('customer_change_email_address', {'id':'{{ customer.id }}'}),
+                JSON.stringify({ 'emailAddress': document.getElementsByName('emailAddress')[0].value}),
+                function(payload) {
+                    var
+                        data = JSON.parse(payload.responseText),
+                        error = document.getElementById('error');
+
+                    switch(payload.status) {
+                        case 403:
+                            error.style.color='red';
+                            error.textContent=data.message;
+                            break;
+                        default:
+                            error.style.color='green';
+                            error.textContent=data.message;
+                            break;
+                    }
+
+                },
+                Ajax.jsonPayload
+            ),
+            event.preventDefault();
+        });
+    </script>
+{% endblock %}

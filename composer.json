@@ -1,0 +1,25 @@
+{
+    "name": "nigelgreenway/project",
+    "authors": [
+        {
+            "name": "Nigel Greenway",
+            "email": "nigel_greenway@me.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "nigelgreenway/colonel": "master-dev",
+        "twig/twig": "v1.18.2",
+        "vlucas/phpdotenv": "v2.0.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Demo\\Application\\": "Application/",
+            "Demo\\": "ApplicationInterface/Http/",
+            "Customer\\": "ApplicationInterface/Http/Customer/",
+            "Core\\": "ApplicationInterface/Http/Core/",
+            "Demo\\Infrastructure\\": "Infrastructure/",
+            "Demo\\Domain\\": "Domain/"
+        }
+    }
+  }

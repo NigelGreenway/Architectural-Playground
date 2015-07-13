@@ -1,0 +1,31 @@
+{% extends '@Base/base.html.twig' %}
+
+{% block title %}Customer Listing{% endblock %}
+
+{% block body %}
+
+    <h2>Our Customers</h2>
+    <ul>
+    {% for customer in customers %}
+        <li>
+            {{ customer.firstName ~ ' ' ~ customer.lastNames }} | <a href="{{ route('customer_profile', {'id': customer.id}) }}">View Profile</a>
+        </li>
+    {% endfor %}
+        <li style="list-style: none;margin-top:25px;">
+            <a
+                class="btn"
+                href="{{ route('customer_registration') }}"
+                style="
+                    border:1px solid #2e6da4;
+                    background-color: #337ab8;
+                    color:#ffffff;
+                    padding:10px 15px;
+                    text-decoration: none;
+                "
+            >
+                Register a new customer
+            </a>
+        </li>
+    </ul>
+
+{% endblock %}
